@@ -1,0 +1,42 @@
+(S'##BEGINNING OF PROGRAM##'
+p0
+S'Tab Number 1'
+p1
+S'Move J [*]  X) 70.396   Y) -0.192   Z) 498.37   W) 89.666   P) 24.571   R) 85.834   T) 40.0   Speed-10 Ad 15 As 10 Dd 0 Ds 5 $N'
+p2
+S'Move J [*]  X) 62.176   Y) -0.205   Z) 516.544   W) 89.682   P) 24.571   R) 85.822   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p3
+S'Move J [*]  X) 53.883   Y) -0.23   Z) 534.721   W) 89.722   P) 24.601   R) 85.807   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p4
+S'Move J [*]  X) 45.478   Y) -0.269   Z) 552.862   W) 89.703   P) 24.621   R) 85.851   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p5
+S'Move J [*]  X) 37.126   Y) -0.298   Z) 570.996   W) 89.732   P) 24.611   R) 85.867   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p6
+S'Move J [*]  X) 28.728   Y) -0.328   Z) 589.146   W) 89.742   P) 24.661   R) 85.86   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p7
+S'Move J [*]  X) 20.314   Y) -0.361   Z) 607.32   W) 89.734   P) 24.671   R) 85.888   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p8
+S'Move J [*]  X) 11.794   Y) -0.385   Z) 625.457   W) 89.771   P) 24.722   R) 85.892   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p9
+S'Move J [*]  X) 3.442   Y) -0.415   Z) 643.58   W) 89.782   P) 24.734   R) 85.912   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p10
+S'Move J [*]  X) 11.794   Y) -0.385   Z) 625.457   W) 89.771   P) 24.722   R) 85.892   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p11
+S'Move J [*]  X) 20.314   Y) -0.361   Z) 607.32   W) 89.734   P) 24.671   R) 85.888   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p12
+S'Move J [*]  X) 28.728   Y) -0.328   Z) 589.146   W) 89.742   P) 24.661   R) 85.86   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p13
+S'Move J [*]  X) 37.126   Y) -0.298   Z) 570.996   W) 89.732   P) 24.611   R) 85.867   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p14
+S'Move J [*]  X) 45.478   Y) -0.269   Z) 552.862   W) 89.703   P) 24.621   R) 85.851   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p15
+S'Move J [*]  X) 53.883   Y) -0.23   Z) 534.721   W) 89.722   P) 24.601   R) 85.807   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p16
+S'Move J [*]  X) 62.176   Y) -0.205   Z) 516.544   W) 89.682   P) 24.571   R) 85.822   T) 40.0   Speed-10 Ad 0 As 10 Dd 0 Ds 5 $N'
+p17
+S'Move J [*]  X) 70.396   Y) -0.192   Z) 498.37   W) 89.666   P) 24.571   R) 85.834   T) 40.0   Speed-10 Ad 15 As 10 Dd 0 Ds 5 $N'
+p18
+S'Jump Tab-1'
+p19
+tp20
+.

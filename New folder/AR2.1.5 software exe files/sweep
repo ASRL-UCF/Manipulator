@@ -1,0 +1,12 @@
+(S'##BEGINNING OF PROGRAM##'
+p0
+S'Tab Number 1'
+p1
+S'Wait T - wait time - Seconds-3'
+p2
+S'Move J [*]  X) 25.719   Y) 70.515   Z) 612.189   W) -160.035   P) 48.119   R) -84.699   T) 40.0   Speed-10 Ad 15 As 10 Dd 20 Ds 5 $F'
+p3
+S'Move J [*]  X) 85.697   Y) -236.06   Z) 495.74   W) -20.026   P) 88.089   R) -84.773   T) 40.0   Speed-10 Ad 15 As 10 Dd 20 Ds 5 $F'
+p4
+tp5
+.
