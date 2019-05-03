@@ -1,0 +1,12 @@
+CREATING A BETTER MOVE
+
+GOAL: TRAJECTORY TRACKING 
+
+	read about vector value function again
+	given a z value timestamps, reach those points using a function/trajectory tracking.
+	
+	start point is already on function that it wants to track.
+	
+	HOW TO MODIFY:
+	callback funciton?
+	input of the function what gets inputted in the script and what gets called to calc kinematics
