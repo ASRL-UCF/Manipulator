@@ -22,8 +22,8 @@
         * you must give appropriate credit and indicate if changes were made. You may do
           so in any reasonable manner, but not in any way that suggests the
           licensor endorses you or your use.
-		* Selling robots, robot parts, or any versions of robots or software based on this 
-		  work is strictly prohibited.
+    * Selling robots, robot parts, or any versions of robots or software based on this 
+      work is strictly prohibited.
 
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
     ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -59,15 +59,16 @@ SPEED UP CALIBRATION MOVE
 '''
 ##########################################################################
 
-from Tkinter import *
-import ttk
+from tkinter import *
+from tkinter import ttk
+import tkinter.messagebox
 import pickle
+#pip install pyserial, remove serial if you have it
 import serial
 import time
 import threading
-import Queue
+import queue
 import math
-import tkMessageBox
 import webbrowser
 
 
@@ -415,7 +416,7 @@ def executeRow():
     eval(regEntry).insert(0,regEqVal)
   ## Get Vision ##
   if (cmdType == "Get Vi"):
-    testvis()	
+    testvis() 
   ##If Register Jump to Row##
   if (cmdType == "If Reg"):
     regIndex = command.find("If Register ")
@@ -443,7 +444,7 @@ def executeRow():
     J4newIndex = command.find("W) ")
     J5newIndex = command.find("P) ")
     J6newIndex = command.find("R) ")
-    TRnewIndex = command.find("T) ")	
+    TRnewIndex = command.find("T) ")  
     SpeedIndex = command.find("Speed-")
     ACCdurIndex = command.find("Ad")
     ACCspdIndex = command.find("As")
@@ -480,7 +481,7 @@ def executeRow():
     J4newIndex = command.find("W) ")
     J5newIndex = command.find("P) ")
     J6newIndex = command.find("R) ")
-    TRnewIndex = command.find("T) ")	
+    TRnewIndex = command.find("T) ")  
     SpeedIndex = command.find("Speed-")
     ACCdurIndex = command.find("Ad")
     ACCspdIndex = command.find("As")
@@ -518,7 +519,7 @@ def executeRow():
   if (cmdType == "Move S"): 
     SPnewInex = command.find("[SP:")  
     SPendInex = command.find("] [")
-    TRnewIndex = command.find("T) ")	
+    TRnewIndex = command.find("T) ")  
     SpeedIndex = command.find("Speed-")
     ACCdurIndex = command.find("Ad")
     ACCspdIndex = command.find("As")
@@ -552,7 +553,7 @@ def executeRow():
     SPendInex = command.find("] offs")
     SP2newInex = command.find("[*SP:")  
     SP2endInex = command.find("]  [")
-    TRnewIndex = command.find("T) ")	
+    TRnewIndex = command.find("T) ")  
     SpeedIndex = command.find("Speed-")
     ACCdurIndex = command.find("Ad")
     ACCspdIndex = command.find("As")
@@ -566,7 +567,7 @@ def executeRow():
     CZ = float(eval("SP_"+SP+"_E3_EntryField").get()) + float(eval("SP_"+SP2+"_E3_EntryField").get())
     CRx = float(eval("SP_"+SP+"_E4_EntryField").get()) + float(eval("SP_"+SP2+"_E4_EntryField").get())
     CRy = float(eval("SP_"+SP+"_E5_EntryField").get()) + float(eval("SP_"+SP2+"_E5_EntryField").get())
-    CRz = float(eval("SP_"+SP+"_E6_EntryField").get()) + float(eval("SP_"+SP2+"_E6_EntryField").get())	
+    CRz = float(eval("SP_"+SP+"_E6_EntryField").get()) + float(eval("SP_"+SP2+"_E6_EntryField").get())  
     Track = float(command[TRnewIndex+3:SpeedIndex-1])
     newSpeed = str(command[SpeedIndex+6:ACCdurIndex-1])
     ACCdur = command[ACCdurIndex+3:ACCspdIndex-1]
@@ -580,11 +581,11 @@ def executeRow():
     TCRx = 0
     TCRy = 0
     TCRz = 0 
-    MoveXYZ(CX,CY,CZ,CRx,CRy,CRz,newSpeed,ACCdur,ACCspd,DECdur,DECspd,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz,Track)   	
+    MoveXYZ(CX,CY,CZ,CRx,CRy,CRz,newSpeed,ACCdur,ACCspd,DECdur,DECspd,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz,Track)    
   rowinproc = 0   
 
-	 
-	 
+   
+   
 def gotoFineCalPos():
   command = fineCalEntryField.get() 
   J1newIndex = command.find("X) ")
@@ -593,7 +594,7 @@ def gotoFineCalPos():
   J4newIndex = command.find("W) ")
   J5newIndex = command.find("P) ")
   J6newIndex = command.find("R) ")
-  TRnewIndex = command.find("T) ")	
+  TRnewIndex = command.find("T) ")  
   SpeedIndex = command.find("Speed-")
   ACCdurIndex = command.find("Ad")
   ACCspdIndex = command.find("As")
@@ -622,7 +623,7 @@ def gotoFineCalPos():
   MoveXYZ(CX,CY,CZ,CRx,CRy,CRz,newSpeed,ACCdur,ACCspd,DECdur,DECspd,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz,Track)
   almStatusLab.config(text="MOVED TO FINE CALIBRATION POSITION", bg = "yellow")
 
-	
+  
 def exeFineCalPos():
   command = fineCalEntryField.get() 
   J1newIndex = command.find("X) ")
@@ -631,7 +632,7 @@ def exeFineCalPos():
   J4newIndex = command.find("W) ")
   J5newIndex = command.find("P) ")
   J6newIndex = command.find("R) ")
-  TRnewIndex = command.find("T) ")	
+  TRnewIndex = command.find("T) ")  
   SpeedIndex = command.find("Speed-")
   ACCdurIndex = command.find("Ad")
   ACCspdIndex = command.find("As")
@@ -725,7 +726,7 @@ def runProg():
       rowinproc = 1
       executeRow()
       while rowinproc == 1:
-        time.sleep(.2)	  
+        time.sleep(.01)   
       selRow = tab1.progView.curselection()[0]
       last = tab1.progView.index('end')
       for row in range (0,selRow):
@@ -737,7 +738,7 @@ def runProg():
       selRow += 1
       tab1.progView.select_set(selRow)
       curRow += 1
-      time.sleep(.2)
+      time.sleep(.03)
       try:
         selRow = tab1.progView.curselection()[0]
         curRowEntryField.delete(0, 'end')
@@ -760,8 +761,8 @@ def stopProg():
     runStatusLab.config(text='PROGRAM RUNNING', bg = "green")
 
 
-	
-	
+  
+  
 def calRobotAll():
   calaxis = "111111"
   speed = "50"
@@ -782,11 +783,11 @@ def calRobotAll():
   if(J4caldir == J4motdir):
     J4caldrive = "1"
   else:
-    J4caldrive = "0" 	
+    J4caldrive = "0"  
   if(J5caldir == J5motdir):
     J5caldrive = "1"
   else:
-    J5caldrive = "0" 	
+    J5caldrive = "0"  
   if(J6caldir == J6motdir):
     J6caldrive = "1"
   else:
@@ -854,7 +855,7 @@ def calRobotJ4():
   if(J4caldir == J4motdir):
     J4caldrive = "1"
   else:
-    J4caldrive = "0" 	   
+    J4caldrive = "0"     
   command = "MJD"+J4caldrive+"500"+"S15G10H10I10K10"
   ser.write(command +"\n")
   ser.flushInput()
@@ -870,7 +871,7 @@ def calRobotJ5():
   if(J5caldir == J5motdir):
     J5caldrive = "1"
   else:
-    J5caldrive = "0" 	       
+    J5caldrive = "0"         
   command = "MJE"+J5caldrive+"500"+"S15G10H10I10K10"
   ser.write(command +"\n")
   ser.flushInput()
@@ -893,8 +894,8 @@ def calRobotJ6():
   speed = "8"
   time.sleep(2.5)
   calRobot(calaxis,speed)  
-	
-	
+  
+  
 
 def calRobot(calaxis,speed):
   J1axis = calaxis[:-5]
@@ -911,11 +912,11 @@ def calRobot(calaxis,speed):
   if (J2axis == "1"):
     J2step = str(J2StepLim)
   else:
-    J2step = "0" 	
+    J2step = "0"  
   if (J3axis == "1"):
     J3step = str(J3StepLim)
   else:
-    J3step = "0" 	
+    J3step = "0"  
   if (J4axis == "1"):
     J4step = str(J4StepLim)
   else:
@@ -927,7 +928,7 @@ def calRobot(calaxis,speed):
   if (J6axis == "1"):
     J6step = str(J6StepLim)
   else:
-    J6step = "0" 	
+    J6step = "0"  
   ### calc correct calibration direction
   if(J1caldir == J1motdir):
     J1caldrive = "0"
@@ -944,11 +945,11 @@ def calRobot(calaxis,speed):
   if(J4caldir == J4motdir):
     J4caldrive = "0"
   else:
-    J4caldrive = "1" 	
+    J4caldrive = "1"  
   if(J5caldir == J5motdir):
     J5caldrive = "0"
   else:
-    J5caldrive = "1" 	
+    J5caldrive = "1"  
   if(J6caldir == J6motdir):
     J6caldrive = "0"
   else:
@@ -1012,7 +1013,7 @@ def calRobot(calaxis,speed):
         J4AngCur = J4PosAngLim
       J4curAngEntryField.delete(0, 'end')
       J4curAngEntryField.insert(0,str(J4AngCur))
-    ###########	
+    ########### 
     ##J5##
     global J5StepCur
     global J5AngCur
@@ -1025,7 +1026,7 @@ def calRobot(calaxis,speed):
         J5AngCur = J5PosAngLim
       J5curAngEntryField.delete(0, 'end')
       J5curAngEntryField.insert(0,str(J5AngCur))
-    ###########	
+    ########### 
     ##J6##
     global J6StepCur
     global J6AngCur
@@ -1038,7 +1039,7 @@ def calRobot(calaxis,speed):
         J6AngCur = J6PosAngLim
       J6curAngEntryField.delete(0, 'end')
       J6curAngEntryField.insert(0,str(J6AngCur))
-    ###########		
+    ###########   
     value=calibration.get(0,END)
     pickle.dump(value,open("ARbot.cal","wb"))
     almStatusLab.config(text='CALIBRATION SUCCESSFUL', bg = "grey")
@@ -1047,7 +1048,7 @@ def calRobot(calaxis,speed):
     if (calvalue == "fail\n"):
       calStat = 0
       almStatusLab.config(text="CALIBRATION FAILED", bg = "red")
-  CalcFwdKin()	  
+  CalcFwdKin()    
   savePosData()
 
 
@@ -1491,9 +1492,9 @@ def J1jogPos():
     J1Degs = J1Degs*J1DegPerStep
   #calc pos dir output
   if (J1motdir == "0"):
-	J1drivedir = "1"
+          J1drivedir = "1"
   else:
-    J1drivedir = "0"	
+    J1drivedir = "0"  
   if (J1Degs <= (J1PosAngLim - J1AngCur)):
     ser.write("MJA"+J1drivedir+str(J1jogSteps)+"S"+Speed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd+"\n")    
     ser.flushInput()
@@ -1565,9 +1566,9 @@ def J2jogPos():
     J2Degs = J2Degs*J2DegPerStep
   #calc pos dir output
   if (J2motdir == "0"):
-	J2drivedir = "1"
+          J2drivedir = "1"
   else:
-    J2drivedir = "0"	
+    J2drivedir = "0"  
   if (J2Degs <= (J2PosAngLim - J2AngCur)):
     ser.write("MJB"+J2drivedir+str(J2jogSteps)+"S"+Speed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd+"\n")    
     ser.flushInput()
@@ -1639,9 +1640,9 @@ def J3jogPos():
     J3Degs = J3Degs*J3DegPerStep
   #calc pos dir output
   if (J3motdir == "0"):
-	J3drivedir = "1"
+          J3drivedir = "1"
   else:
-    J3drivedir = "0"	
+    J3drivedir = "0"  
   if (J3Degs <= (J3PosAngLim - J3AngCur)):
     ser.write("MJC"+J3drivedir+str(J3jogSteps)+"S"+Speed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd+"\n")    
     ser.flushInput()
@@ -1713,9 +1714,9 @@ def J4jogPos():
     J4Degs = J4Degs*J4DegPerStep
   #calc pos dir output
   if (J4motdir == "0"):
-	J4drivedir = "1"
+          J4drivedir = "1"
   else:
-    J4drivedir = "0"	
+    J4drivedir = "0"  
   if (J4Degs <= (J4PosAngLim - J4AngCur)):
     ser.write("MJD"+J4drivedir+str(J4jogSteps)+"S"+Speed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd+"\n")    
     ser.flushInput()
@@ -1788,9 +1789,9 @@ def J5jogPos():
     J5Degs = J5Degs*J5DegPerStep
   #calc pos dir output
   if (J5motdir == "0"):
-	J5drivedir = "1"
+          J5drivedir = "1"
   else:
-    J5drivedir = "0"	
+    J5drivedir = "0"  
   if (J5Degs <= (J5PosAngLim - J5AngCur)):
     ser.write("MJE"+J5drivedir+str(J5jogSteps)+"S"+Speed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd+"\n")    
     ser.flushInput()
@@ -1862,9 +1863,9 @@ def J6jogPos():
     J6Degs = J6Degs*J6DegPerStep
   #calc pos dir output
   if (J6motdir == "0"):
-	J6drivedir = "1"
+          J6drivedir = "1"
   else:
-    J6drivedir = "0"	
+    J6drivedir = "0"  
   if (J6Degs <= (J6PosAngLim - J6AngCur)):
     ser.write("MJF"+J6drivedir+str(J6jogSteps)+"S"+Speed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd+"\n")    
     ser.flushInput()
@@ -2183,7 +2184,7 @@ def TrackjogNeg():
     ser.write("MJT0"+TrackSteps+"S"+Speed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd+"\n")    
     ser.flushInput()
     time.sleep(.2)
-    ser.read()  	
+    ser.read()    
     TrackcurPos = TrackcurPos - (float(TrackSteps) * (TrackLength/TrackStepLim))
     TrackcurEntryField.delete(0, 'end')  
     TrackcurEntryField.insert(0,str(TrackcurPos))
@@ -2515,7 +2516,7 @@ def teachInsertBelSelected():
     selRow = tab1.progView.curselection()[0]
     selRow += 1
   except:
-    print "foo"  
+    print ("foo")  
   Speed = speedEntryField.get()
   ACCdur = ACCdurField.get()
   ACCspd = ACCspeedField.get()
@@ -2563,17 +2564,17 @@ def teachInsertBelSelected():
   elif(movetype == "Teach SP"):
     SP = str(SavePosEntryField.get())
     SPE6 = "Store Position "+SP+" Element 6 = "+str(round(RzcurPos,3))         
-    tab1.progView.insert(selRow, SPE6)	
+    tab1.progView.insert(selRow, SPE6)  
     SPE5 = "Store Position "+SP+" Element 5 = "+str(round(RycurPos,3))            
     tab1.progView.insert(selRow, SPE5)
     SPE4 = "Store Position "+SP+" Element 4 = "+str(round(RxcurPos,3))           
-    tab1.progView.insert(selRow, SPE4)	
+    tab1.progView.insert(selRow, SPE4)  
     SPE3 = "Store Position "+SP+" Element 3 = "+str(round(ZcurPos,3))        
-    tab1.progView.insert(selRow, SPE3)	
+    tab1.progView.insert(selRow, SPE3)  
     SPE2 = "Store Position "+SP+" Element 2 = "+str(round(YcurPos,3))            
-    tab1.progView.insert(selRow, SPE2)	
+    tab1.progView.insert(selRow, SPE2)  
     SPE1 = "Store Position "+SP+" Element 1 = "+str(round(XcurPos,3))         
-    tab1.progView.insert(selRow, SPE1)   	
+    tab1.progView.insert(selRow, SPE1)    
     value=tab1.progView.get(0,END)
     pickle.dump(value,open(ProgEntryField.get(),"wb"))
 
@@ -3555,7 +3556,7 @@ def CalcRevKin(CX,CY,CZ,CRx,CRy,CRz,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz):
   elif (O4<0 and O5<0):
     V9 = 3
   elif (O4<0 and O5>0):
-    V9 = 4	
+    V9 = 4  
   ## DH TABLE
   D13 = math.radians(DHr1)
   D14 = math.radians(DHr2)
@@ -3574,7 +3575,7 @@ def CalcRevKin(CX,CY,CZ,CRx,CRy,CRz,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz):
   F15 = DHa3
   F16 = DHa4
   F17 = DHa5
-  F18 = DHa6	
+  F18 = DHa6  
   ## WORK FRAME INPUT
   H13 = -float(UFxEntryField.get()) 
   H14 = -float(UFyEntryField.get())  
@@ -3614,7 +3615,7 @@ def CalcRevKin(CX,CY,CZ,CRx,CRy,CRz,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz):
   X31 = math.cos(math.radians(O8))*math.cos(math.radians(O9))*math.sin(math.radians(O7))+math.cos(math.radians(O7))*math.sin(math.radians(O9))
   Y31 = math.cos(math.radians(O7))*math.cos(math.radians(O8))*math.cos(math.radians(O9))-math.sin(math.radians(O7))*math.sin(math.radians(O9))
   Z31 = math.cos(math.radians(O9))*math.sin(math.radians(O8))
-  AA31 = O5   	
+  AA31 = O5     
   X32 = math.sin(math.radians(O7))*math.sin(math.radians(O8))
   Y32 = math.cos(math.radians(O7))*math.sin(math.radians(O8))
   Z32 = -math.cos(math.radians(O8))
@@ -3735,7 +3736,7 @@ def CalcRevKin(CX,CY,CZ,CRx,CRy,CRz,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz):
     P13 = -180 + math.degrees(O13)
   if (V9 == 4):
     P13 = 180 + math.degrees(O13)
-  ## CALCULATE J2 ANGLE	FWD
+  ## CALCULATE J2 ANGLE FWD
   O18 = math.sqrt(((abs(AA67))**2)+((abs(AA66))**2))
   O19 = AA68-E13
   O20 = O18-F13
@@ -3745,7 +3746,7 @@ def CalcRevKin(CX,CY,CZ,CRx,CRy,CRz,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz):
   O24 = 180-math.degrees(math.acos(((abs(E16)**2)+(F14**2)-(O21**2))/(2*abs(E16)*F14)))
   O26 = -(O22+O23)
   O27 = O24
-  ## CALCULATE J2 ANGLE	MID
+  ## CALCULATE J2 ANGLE MID
   P20 = -O20
   P21 = math.sqrt((O19**2)+(P20**2))
   P22 = math.degrees(math.acos(((F14**2)+(P21**2)-(abs(E16)**2))/(2*F14*P21)))
@@ -3892,7 +3893,7 @@ def CalcRevKin(CX,CY,CZ,CRx,CRy,CRz,WC,TCX,TCY,TCZ,TCRx,TCRy,TCRz):
   if (Y74 < 0):
     R9 = math.degrees(math.atan2(-Y74,X74))-180
   else:
-    R9 = math.degrees(math.atan2(-Y74,X74))+180  	
+    R9 = math.degrees(math.atan2(-Y74,X74))+180   
   S7 = math.degrees(math.atan2(-Z73,-Z72))
   S8 = math.degrees(math.atan2(-math.sqrt(1-Z74**2),Z74))
   if (Y74 < 0):
@@ -3956,7 +3957,7 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
     if (float(J1newAng) >= float(J1AngCur)):   
       #calc pos dir output
       if (J1motdir == "0"):
-	    J1drivedir = "1"
+                          J1drivedir = "1"
       else:
         J1drivedir = "0"
       J1dir = J1drivedir
@@ -3976,7 +3977,7 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
     if (float(J2newAng) >= float(J2AngCur)):   
       #calc pos dir output
       if (J2motdir == "0"):
-	    J2drivedir = "1"
+                          J2drivedir = "1"
       else:
         J2drivedir = "0"
       J2dir = J2drivedir
@@ -3996,7 +3997,7 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
     if (float(J3newAng) >= float(J3AngCur)):   
       #calc pos dir output
       if (J3motdir == "0"):
-	    J3drivedir = "1"
+                          J3drivedir = "1"
       else:
         J3drivedir = "0"
       J3dir = J3drivedir
@@ -4016,7 +4017,7 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
     if (float(J4newAng) >= float(J4AngCur)):   
       #calc pos dir output
       if (J4motdir == "0"):
-	    J4drivedir = "1"
+                          J4drivedir = "1"
       else:
         J4drivedir = "0"
       J4dir = J4drivedir
@@ -4036,7 +4037,7 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
     if (float(J5newAng) >= float(J5AngCur)):   
       #calc pos dir output
       if (J5motdir == "0"):
-	    J5drivedir = "1"
+                          J5drivedir = "1"
       else:
         J5drivedir = "0"
       J5dir = J5drivedir
@@ -4056,7 +4057,7 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
     if (float(J6newAng) >= float(J6AngCur)):   
       #calc pos dir output
       if (J6motdir == "0"):
-	    J6drivedir = "1"
+                          J6drivedir = "1"
       else:
         J6drivedir = "0"
       J6dir = J6drivedir
@@ -4074,16 +4075,16 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
       J6steps = str(J6steps)
     ##Track calc##
     if (TrackNew >= TrackcurPos):
-	  TRdir = "1"
-	  TRdist = TrackNew - TrackcurPos
-	  TRstep = str(int((TrackStepLim/TrackLength)*TRdist))
+                  TRdir = "1"
+                  TRdist = TrackNew - TrackcurPos
+                  TRstep = str(int((TrackStepLim/TrackLength)*TRdist))
     else:
       TRdir = "0"
-      TRdist = TrackcurPos - TrackNew	
+      TRdist = TrackcurPos - TrackNew 
       TRstep = str(int((TrackStepLim/TrackLength)*TRdist))
     TrackcurPos = TrackNew
     TrackcurEntryField.delete(0, 'end')  
-    TrackcurEntryField.insert(0,str(TrackcurPos))	
+    TrackcurEntryField.insert(0,str(TrackcurPos)) 
     commandCalc = "MJA"+J1dir+J1steps+"B"+J2dir+J2steps+"C"+J3dir+J3steps+"D"+J4dir+J4steps+"E"+J5dir+J5steps+"F"+J6dir+J6steps+"T"+TRdir+TRstep+"S"+newSpeed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd
     ser.write(commandCalc +"\n")
     ser.flushInput()
@@ -4107,7 +4108,7 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
     DisplaySteps()
     savePosData()  
 
-	
+  
 
 def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DECspd,Track):
   almStatusLab.config(text="SYSTEM READY", bg = "grey")
@@ -4142,7 +4143,7 @@ def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DEC
     if (float(J1newAng) >= float(J1AngCur)):   
       #calc pos dir output
       if (J1motdir == "0"):
-	    J1drivedir = "1"
+                          J1drivedir = "1"
       else:
         J1drivedir = "0"
       J1dir = J1drivedir
@@ -4162,7 +4163,7 @@ def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DEC
     if (float(J2newAng) >= float(J2AngCur)):   
       #calc pos dir output
       if (J2motdir == "0"):
-	    J2drivedir = "1"
+                          J2drivedir = "1"
       else:
         J2drivedir = "0"
       J2dir = J2drivedir
@@ -4182,7 +4183,7 @@ def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DEC
     if (float(J3newAng) >= float(J3AngCur)):   
       #calc pos dir output
       if (J3motdir == "0"):
-	    J3drivedir = "1"
+                          J3drivedir = "1"
       else:
         J3drivedir = "0"
       J3dir = J3drivedir
@@ -4202,7 +4203,7 @@ def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DEC
     if (float(J4newAng) >= float(J4AngCur)):   
       #calc pos dir output
       if (J4motdir == "0"):
-	    J4drivedir = "1"
+                          J4drivedir = "1"
       else:
         J4drivedir = "0"
       J4dir = J4drivedir
@@ -4222,7 +4223,7 @@ def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DEC
     if (float(J5newAng) >= float(J5AngCur)):   
       #calc pos dir output
       if (J5motdir == "0"):
-	    J5drivedir = "1"
+                          J5drivedir = "1"
       else:
         J5drivedir = "0"
       J5dir = J5drivedir
@@ -4242,7 +4243,7 @@ def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DEC
     if (float(J6newAng) >= float(J6AngCur)):   
       #calc pos dir output
       if (J6motdir == "0"):
-	    J6drivedir = "1"
+                          J6drivedir = "1"
       else:
         J6drivedir = "0"
       J6dir = J6drivedir
@@ -4260,16 +4261,16 @@ def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DEC
       J6steps = str(J6steps)
     ##Track calc##
     if (TrackNew >= TrackcurPos):
-	  TRdir = "1"
-	  TRdist = TrackNew - TrackcurPos
-	  TRstep = str(int((TrackStepLim/TrackLength)*TRdist))
+                  TRdir = "1"
+                  TRdist = TrackNew - TrackcurPos
+                  TRstep = str(int((TrackStepLim/TrackLength)*TRdist))
     else:
       TRdir = "0"
-      TRdist = TrackcurPos - TrackNew	
+      TRdist = TrackcurPos - TrackNew 
       TRstep = str(int((TrackStepLim/TrackLength)*TRdist))
     TrackcurPos = TrackNew
     TrackcurEntryField.delete(0, 'end')  
-    TrackcurEntryField.insert(0,str(TrackcurPos))	
+    TrackcurEntryField.insert(0,str(TrackcurPos)) 
     commandCalc = "MJA"+J1dir+J1steps+"B"+J2dir+J2steps+"C"+J3dir+J3steps+"D"+J4dir+J4steps+"E"+J5dir+J5steps+"F"+J6dir+J6steps+"T"+TRdir+TRstep+"S"+newSpeed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd
     J1curAngEntryField.delete(0, 'end')
     J1curAngEntryField.insert(0,str(J1AngCur))
@@ -4285,7 +4286,7 @@ def CalNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DEC
     J6curAngEntryField.insert(0,str(J6AngCur))
     CalcFwdKin()
     DisplaySteps()
-    savePosData()  	
+    savePosData()   
  
  
 def testvis():  
@@ -4295,9 +4296,9 @@ def testvis():
   if(visprog[:]== "Roborealm 1.7.5"):
     roborealm175()
   if(visprog[:]== "x,y,r"):
-    xyr()	
-	
-	
+    xyr() 
+  
+  
 
 def openvision():
   global Xpos
@@ -4319,10 +4320,10 @@ def openvision():
     viscalc(x,y)
     if (Ypos > VisEndYmm):
       visfail = 1
-      time.sleep(.2)
+      time.sleep(.1)
     else:
       visfail = 0
-  open(VisFileLoc,"w").close()	  
+  open(VisFileLoc,"w").close()    
   VisXfindEntryField.delete(0, 'end')
   VisXfindEntryField.insert(0,Xpos) 
   VisYfindEntryField.delete(0, 'end')
@@ -4364,7 +4365,7 @@ def roborealm175():
     viscalc(x,y)
     if (Ypos > VisEndYmm):
       visfail = 1
-      time.sleep(.2)
+      time.sleep(.1)
     else:
       visfail = 0
   open(VisFileLoc,"w").close() 
@@ -4411,7 +4412,7 @@ def xyr():
     viscalc(x,y)
     if (Ypos > VisEndYmm):
       visfail = 1
-      time.sleep(.2)
+      time.sleep(.1)
     else:
       visfail = 0
   open(VisFileLoc,"w").close() 
@@ -6759,27 +6760,16 @@ CalcFwdKin()
 try:
   setCom()
 except:
-  print ""
+  print ("")
 
 loadProg()
-msg = "AR2 SOFTWARE AND MODELS ARE FREE:\n\
+msg = "AR2 HARDWARE AND SOFTWARE CREATED BY:\n\
 \n\
-*for personal use.\n\
-*for educational use.\n\
-*for building your own robot(s).\n\
-*for automating your own business.\n\
+Copyright (c) 2017, Chris Annin\n\
 \n\
-IT IS NOT OK TO RESELL THIS SOFTWARE\n\
-FOR A PROFIT - IT MUST REMAIN FREE.\n\
-\n\
-IT IS NOT OK TO SELL AR2 ROBOTS,\n\
-ROBOT PARTS, OR ANY OTHER VERSION \n\
-OF ROBOT OR SOFTWARE BASED ON THE \n\
-AR2 ROBOT DESIGN FOR PROFIT.\n\
-\n\
-Copyright (c) 2017, Chris Annin"
+"
 
-tkMessageBox.showwarning("AR2 License / Copyright notice", msg)
+#tkinter.messagebox.showwarning("AR2 License / Copyright notice", msg)
 
 tab1.mainloop()
 
