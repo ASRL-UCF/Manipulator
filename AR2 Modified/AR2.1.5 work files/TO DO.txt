@@ -14,9 +14,10 @@ GOAL: TRAJECTORY TRACKING
 	
 IMPLEMENTATION?
 
-	for linear updown, must give height brackets: once you start the program, depending on were its at, all other factors are fixed: x,y pos & yaw,pitch,roll fixed.
+	for linear updown, must give height brackets & period time: 
+		once you start the program, depending on were its at, all other factors are fixed: x,y pos & yaw,pitch,roll fixed.
 	
-	
+		calculation based on [upper-lower]cos(wt)+[lower]
 	
 	
 	
