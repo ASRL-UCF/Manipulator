@@ -99,6 +99,10 @@ nb.add(tab4, text='   Registers    ')
 tab5 = ttk.Frame(nb)
 nb.add(tab5, text='   Vision    ')
 
+tab6 = ttk.Frame(nb)
+nb.add(tab6, text='    Trajectories   ')
+
+
 global J1NegAngLim
 global J1PosAngLim
 global J1StepLim
@@ -6415,6 +6419,17 @@ VisYpixfindEntryField.place(x=720, y=130)
 
 
 
+####################################################################################################################################################
+####################################################################################################################################################
+####################################################################################################################################################
+####TAB 6
+
+##test button
+testBut = Button(tab6, bg="grey85", text="test", height=1, width=15, command = print('hi'))
+testBut.place(x=500, y=190)
+
+
+
 
 
 
@@ -6769,6 +6784,7 @@ Copyright (c) 2017, Chris Annin\n\
 \n\
 "
 
+#removed message for faster debugging
 #tkinter.messagebox.showwarning("AR2 License / Copyright notice", msg)
 
 tab1.mainloop()
