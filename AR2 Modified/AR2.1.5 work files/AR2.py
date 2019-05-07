@@ -6428,10 +6428,37 @@ VisYpixfindEntryField.place(x=720, y=130)
 testBut = Button(tab6, bg="grey85", text="test", height=1, width=15, command = print('hi'))
 testBut.place(x=500, y=190)
 
+#label for section
+LinLab = Label(tab6,  font=("Arial", 18), text = "Linear Contrained Motion in Z Axis")
+LinLab.place(x=45, y=30)
 
+#label next to period entry field
+PeriodLab = Label(tab6,  font=("Arial", 12), text = "Period of Movement")
+PeriodLab.place(x=120, y=57)
 
+#period entry field
+PeriodEntryField = Entry(tab6,width=10)
+PeriodEntryField.place(x=55, y=60)
 
+#label next to upper z entry field
+UpperZLab = Label(tab6,  font=("Arial", 12), text = "Upper Z Coordinate")
+UpperZLab.place(x=120, y=87)
 
+#upper z entry field
+UpperZBoundEntryField = Entry(tab6,width=10)
+UpperZBoundEntryField.place(x=55, y=90)
+
+#label next to lower z entry field
+LowerZLab = Label(tab6,  font=("Arial", 12), text = "Lower Z Coordinate")
+LowerZLab.place(x=120, y=117)
+
+#lower z entry field
+LowerZBoundEntryField = Entry(tab6,width=10)
+LowerZBoundEntryField.place(x=55, y=120)
+
+##button to run the constrained program
+RunLinBut = Button(tab6, bg="grey85", text="Run Constrained Motion", height=1, width=20, command = print('hi'))
+RunLinBut.place(x=55, y=150)
 
 
 ###OPEN CAL FILE AND LOAD LIST############################################
