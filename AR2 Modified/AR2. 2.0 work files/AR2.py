@@ -112,11 +112,13 @@ tab5 = tkinter.ttk.Frame(nb)
 nb.add(tab5, text='   Vision    ')
 
 tab6 = tkinter.ttk.Frame(nb)
-#nb.add(tab6, text='   Testing    ')
+nb.add(tab6, text='   Testing    ')
 
 tab7 = tkinter.ttk.Frame(nb)
 nb.add(tab7, text='   Info    ')
 
+tab8 = tkinter.ttk.Frame(nb)
+nb.add(tab8, text='   Trajectories    ')
 
 
 ###############################################################################################################################################################
@@ -7156,6 +7158,47 @@ configfile.pack(side="left")
 scroll.config(command=configfile.yview)
 configfile.place(x=10, y=40)
 
+####################################################################################################################################################
+####################################################################################################################################################
+####################################################################################################################################################
+####TAB 8
+
+
+##test button
+testBut = Button(tab8, bg="grey85", text="test", height=1, width=15, command = print('hi'))
+testBut.place(x=500, y=190)
+
+#label for section
+LinLab = Label(tab8,  font=("Arial", 18), text = "Linear Contrained Motion in Z Axis")
+LinLab.place(x=45, y=30)
+
+#label next to period entry field
+PeriodLab = Label(tab8,  font=("Arial", 12), text = "Period of Movement")
+PeriodLab.place(x=120, y=57)
+
+#period entry field
+PeriodEntryField = Entry(tab8,width=10)
+PeriodEntryField.place(x=55, y=60)
+
+#label next to upper z entry field
+UpperZLab = Label(tab8,  font=("Arial", 12), text = "Upper Z Coordinate")
+UpperZLab.place(x=120, y=87)
+
+#upper z entry field
+UpperZBoundEntryField = Entry(tab8,width=10)
+UpperZBoundEntryField.place(x=55, y=90)
+
+#label next to lower z entry field
+LowerZLab = Label(tab8,  font=("Arial", 12), text = "Lower Z Coordinate")
+LowerZLab.place(x=120, y=117)
+
+#lower z entry field
+LowerZBoundEntryField = Entry(tab8,width=10)
+LowerZBoundEntryField.place(x=55, y=120)
+
+##button to run the constrained program
+RunLinBut = Button(tab8, bg="grey85", text="Run Constrained Motion", height=1, width=20, command = print('hi'))
+RunLinBut.place(x=55, y=150)
 
 
 
@@ -7522,6 +7565,7 @@ AR2 ROBOT DESIGN FOR PROFIT.\n\
 \n\
 Copyright (c) 2017, Chris Annin"
 
+#removed message for faster debugging
 #tkinter.messagebox.showwarning("AR2 License / Copyright notice", msg)
 xboxUse = 0
 
