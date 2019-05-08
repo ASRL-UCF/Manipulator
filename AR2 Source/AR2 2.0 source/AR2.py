@@ -7522,7 +7522,7 @@ AR2 ROBOT DESIGN FOR PROFIT.\n\
 \n\
 Copyright (c) 2017, Chris Annin"
 
-tkinter.messagebox.showwarning("AR2 License / Copyright notice", msg)
+#tkinter.messagebox.showwarning("AR2 License / Copyright notice", msg)
 xboxUse = 0
 
 tab1.mainloop()
