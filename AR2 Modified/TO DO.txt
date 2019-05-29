@@ -135,3 +135,28 @@ MOVING THE ARM
 		6 different steps that the movement will move through
 			
 			
+
+
+	steps per 360 degrees
+	
+	J1 - 200 - 200*360/2pi = ~11,459.165581759554875079179651068‬ steps per rads 
+	J2 - 200 - ...
+	J3 - 200 - ...
+	J4 - 200 -...
+	J5 - 200 - ....
+	J6 - 200 -....
+	
+	each motor can move in - 0.017453 rads intervals
+	
+	
+	
+	given a theta dot
+		thetad1 = .20 //rads per sec
+		
+		//we need to know the amount of steps the motors will run through
+		
+		//thetad1/steps1 = seconds
+		
+		
+		
+		
