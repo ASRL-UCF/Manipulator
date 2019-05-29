@@ -159,4 +159,11 @@ MOVING THE ARM
 		
 		
 		
+		craig book - 231
+			[IN PRACTICE SECTIONS]		
+		solve routine and solve for theta dot
+		
+		
+		
+		
 		
