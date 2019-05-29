@@ -8,7 +8,7 @@ GOAL: TRAJECTORY TRACKING
 	start point is already on function that it wants to track.
 	
 	HOW TO MODIFY:
-	callback funciton?
+	callback function?
 	input of the function what gets inputted in the script and what gets called to calc kinematics
 	
 	
@@ -68,3 +68,70 @@ NOTES:
 			etc.
 			
 			this is how you get the current positions for the arm/variables stored
+			
+	TO FIND THE TIME CONSTRAINT
+		way point/time step
+		
+		at time 0 you have set xyz
+		
+		at time t - you have a required xyz
+		find the velocity using inverse kinematics between these points.
+			finding the velocity between the two positions, knowing/ learning the velocity gives the time becasue you are already dividing by the required time.
+			
+			
+			
+			
+			
+			
+
+MOVING THE ARM
+	ARDUINO SKETCH
+	~line 1177
+		Right now, the arm drives look like this
+	
+**************************************************************************************************	
+	
+	  float AdjSpeed = (SpeedIn / 100);
+		//REG SPEED
+		float LspeedAdj = 2;
+		float CalcRegSpeed = ((SpeedMult * LspeedAdj) / AdjSpeed);
+		int curDelay = int(CalcRegSpeed)/6;
+
+
+		///// DRIVE MOTORS /////
+		while (J1cur < J1step || J2cur < J2step || J3cur < J3step || J4cur < J4step || J5cur < J5step || J6cur < J6step || TRcur < TRstep)
+		{
+
+			/////// J1 ////////////////////////////////
+			if (J1cur < J1step)
+			{
+			J1cur = ++J1cur;
+			digitalWrite(J1stepPin, LOW);
+			delayMicroseconds(curDelay);
+			digitalWrite(J1stepPin, HIGH);
+			}
+	
+**************************************************************************************************
+
+	speedin is some motor speed %
+	
+	i will be given 6 theta dots,
+		supply speeds to speeds and motor step differences, 
+		
+		
+	stepsize delta/motorspeed = theta dots
+	
+	
+		find the max speed the motors run at
+	
+			
+			
+		digital write fast arduino
+			look to see if we can change the digital writes to be faster
+			
+	in order to do this, we'll need to change the code so that 
+		we have input for 6 theta dots
+		6 different time frames that the arm will move
+		6 different steps that the movement will move through
+			
+			
