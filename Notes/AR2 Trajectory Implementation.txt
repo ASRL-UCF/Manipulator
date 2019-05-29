@@ -1,0 +1,30 @@
+How the AR2 Trajectory Tracks
+
+	In main loop of program, before you can interact with the window again, the script calculates and saves all current angles and steps of each motor.
+		this is broken down into three main functions
+			
+			SaveAndApplyCalibration() - finds and saves all DH parameters of the arm. also finds the current angle and step of each motor saving it to a global variable and saving all current position data into a calibration file.
+			DisplaySteps() - displays steps calculated above
+			CalcFwdKin() - calculates fwd kinematics to find x,y,z and rx, ry, rz data using method from excel sheet.
+
+
+	
+	To help visualize what is going on, imagine the arm is at the highest point of its configuration space and wants to move 600mm down while constraining all other motion.
+		for ex:
+			
+			wrt the base frame
+			
+			1. x=1200mm y=0 z=0 rx=0 ry=0 rz=0
+			2. x=600mm y=0 z=0 rx=0 ry=0 rz=0
+			
+			1. is the current position of the robot and 2. is the desired movement position of the arm
+
+			the current position is the position that the arm is physically in and the desired movement is the position data saved in a move file that is to be executed
+			
+			
+			Starting at the executerow() command - this command executes programs loaded from text files.
+			
+				1. reads the input file to receive the desired position data and speed, acceleration and deceleration values.
+				
+	
+	
