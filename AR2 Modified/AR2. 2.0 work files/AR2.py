@@ -4160,6 +4160,8 @@ def MoveNew(J1out,J2out,J3out,J4out,J5out,J6out,newSpeed,ACCdur,ACCspd,DECdur,DE
     TrackcurEntryField.delete(0, 'end')  
     TrackcurEntryField.insert(0,str(TrackcurPos))	
     commandCalc = "MJA"+J1dir+J1steps+"B"+J2dir+J2steps+"C"+J3dir+J3steps+"D"+J4dir+J4steps+"E"+J5dir+J5steps+"F"+J6dir+J6steps+"T"+TRdir+TRstep+"S"+newSpeed+"G"+ACCdur+"H"+ACCspd+"I"+DECdur+"K"+DECspd+"\n"
+    print(commandCalc)
+	
     if Code == 0:
       ser.write(commandCalc.encode())
       ser.flushInput()
