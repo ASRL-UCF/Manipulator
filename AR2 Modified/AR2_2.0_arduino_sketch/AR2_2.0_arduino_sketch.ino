@@ -1234,6 +1234,327 @@ void driveMotorsL(String inData) {
 }
 
 
+void driveMotorsS(String inData) {
+  int J1start = inData.indexOf('A');
+  int J2start = inData.indexOf('B');
+  int J3start = inData.indexOf('C');
+  int J4start = inData.indexOf('D');
+  int J5start = inData.indexOf('E');
+  int J6start = inData.indexOf('F');
+  int TRstart = inData.indexOf('T');
+  int Adstart = inData.indexOf('G');
+  int Asstart = inData.indexOf('H');
+  int Ddstart = inData.indexOf('I');
+  int Dsstart = inData.indexOf('K');
+  int SPstart = inData.indexOf('S');
+  int J1dir = inData.substring(J1start + 1, J1start + 2).toInt();
+  int J2dir = inData.substring(J2start + 1, J2start + 2).toInt();
+  int J3dir = inData.substring(J3start + 1, J3start + 2).toInt();
+  int J4dir = inData.substring(J4start + 1, J4start + 2).toInt();
+  int J5dir = inData.substring(J5start + 1, J5start + 2).toInt();
+  int J6dir = inData.substring(J6start + 1, J6start + 2).toInt();
+  int TRdir = inData.substring(TRstart + 1, TRstart + 2).toInt();
+  int J1step = inData.substring(J1start + 2, J2start).toInt();
+  int J2step = inData.substring(J2start + 2, J3start).toInt();
+  int J3step = inData.substring(J3start + 2, J4start).toInt();
+  int J4step = inData.substring(J4start + 2, J5start).toInt();
+  int J5step = inData.substring(J5start + 2, J6start).toInt();
+  int J6step = inData.substring(J6start + 2, TRstart).toInt();
+  int TRstep = inData.substring(TRstart + 2, SPstart).toInt();
+  float SpeedIn = inData.substring(SPstart + 1, Adstart).toFloat();
+  float ACCdur = inData.substring(Adstart + 1, Asstart).toInt();
+  float ACCspd = inData.substring(Asstart + 1, Ddstart).toInt();
+  float DCCdur = inData.substring(Ddstart + 1, Dsstart).toInt();
+  float DCCspd = inData.substring(Dsstart + 1).toInt();
+
+  //FIND HIGHEST STEP
+  int HighStep = J1step;
+  if (J2step > HighStep)
+  {
+    HighStep = J2step;
+  }
+  if (J3step > HighStep)
+  {
+    HighStep = J3step;
+  }
+  if (J4step > HighStep)
+  {
+    HighStep = J4step;
+  }
+  if (J5step > HighStep)
+  {
+    HighStep = J5step;
+  }
+  if (J6step > HighStep)
+  {
+    HighStep = J6step;
+  }
+  if (TRstep > HighStep)
+  {
+    HighStep = TRstep;
+  }
+
+  //FIND ACTIVE JOINTS
+  int J1active = 0;
+  int J2active = 0;
+  int J3active = 0;
+  int J4active = 0;
+  int J5active = 0;
+  int J6active = 0;
+  int TRactive = 0;
+  int Jactive = 0;
+
+  if (J1step >= 1)
+  {
+    J1active = 1;
+  }
+  if (J2step >= 1)
+  {
+    J2active = 1;
+  }
+  if (J3step >= 1)
+  {
+    J3active = 1;
+  }
+  if (J4step >= 1)
+  {
+    J4active = 1;
+  }
+  if (J5step >= 1)
+  {
+    J5active = 1;
+  }
+  if (J6step >= 1)
+  {
+    J6active = 1;
+  }
+  if (TRstep >= 1)
+  {
+    TRactive = 1;
+  }
+  Jactive = (J1active + J2active + J3active + J4active + J5active + J6active + TRactive);
+
+  int highStepCur = 0;
+  float curDelay = 0;
+
+
+  //SET DIRECTIONS
+
+  /////// J1 /////////
+  if (J1dir == 1 && J1rotdir == 1)
+  {
+    digitalWrite(J1dirPin, LOW);
+  }
+  else if (J1dir == 1 && J1rotdir == 0)
+  {
+    digitalWrite(J1dirPin, HIGH);
+  }
+  else if (J1dir == 0 && J1rotdir == 1)
+  {
+    digitalWrite(J1dirPin, HIGH);
+  }
+  else if (J1dir == 0 && J1rotdir == 0)
+  {
+    digitalWrite(J1dirPin, LOW);
+  }
+
+  /////// J2 /////////
+  if (J2dir == 1 && J2rotdir == 1)
+  {
+    digitalWrite(J2dirPin, LOW);
+  }
+  else if (J2dir == 1 && J2rotdir == 0)
+  {
+    digitalWrite(J2dirPin, HIGH);
+  }
+  else if (J2dir == 0 && J2rotdir == 1)
+  {
+    digitalWrite(J2dirPin, HIGH);
+  }
+  else if (J2dir == 0 && J2rotdir == 0)
+  {
+    digitalWrite(J2dirPin, LOW);
+  }
+
+  /////// J3 /////////
+  if (J3dir == 1 && J3rotdir == 1)
+  {
+    digitalWrite(J3dirPin, LOW);
+  }
+  else if (J3dir == 1 && J3rotdir == 0)
+  {
+    digitalWrite(J3dirPin, HIGH);
+  }
+  else if (J3dir == 0 && J3rotdir == 1)
+  {
+    digitalWrite(J3dirPin, HIGH);
+  }
+  else if (J3dir == 0 && J3rotdir == 0)
+  {
+    digitalWrite(J3dirPin, LOW);
+  }
+
+  /////// J4 /////////
+  if (J4dir == 1 && J4rotdir == 1)
+  {
+    digitalWrite(J4dirPin, LOW);
+  }
+  else if (J4dir == 1 && J4rotdir == 0)
+  {
+    digitalWrite(J4dirPin, HIGH);
+  }
+  else if (J4dir == 0 && J4rotdir == 1)
+  {
+    digitalWrite(J4dirPin, HIGH);
+  }
+  else if (J4dir == 0 && J4rotdir == 0)
+  {
+    digitalWrite(J4dirPin, LOW);
+  }
+
+  /////// J5 /////////
+  if (J5dir == 1 && J5rotdir == 1)
+  {
+    digitalWrite(J5dirPin, LOW);
+  }
+  else if (J5dir == 1 && J5rotdir == 0)
+  {
+    digitalWrite(J5dirPin, HIGH);
+  }
+  else if (J5dir == 0 && J5rotdir == 1)
+  {
+    digitalWrite(J5dirPin, HIGH);
+  }
+  else if (J5dir == 0 && J5rotdir == 0)
+  {
+    digitalWrite(J5dirPin, LOW);
+  }
+
+  /////// J6 /////////
+  if (J6dir == 1 && J6rotdir == 1)
+  {
+    digitalWrite(J6dirPin, LOW);
+  }
+  else if (J6dir == 1 && J6rotdir == 0)
+  {
+    digitalWrite(J6dirPin, HIGH);
+  }
+  else if (J6dir == 0 && J6rotdir == 1)
+  {
+    digitalWrite(J6dirPin, HIGH);
+  }
+  else if (J6dir == 0 && J6rotdir == 0)
+  {
+    digitalWrite(J6dirPin, LOW);
+  }
+
+  /////// TRACK /////////
+  if (TRdir == 1 && TRACKrotdir == 1)
+  {
+    digitalWrite(TRdirPin, LOW);
+  }
+  else if (TRdir == 1 && TRACKrotdir == 0)
+  {
+    digitalWrite(TRdirPin, HIGH);
+  }
+  else if (TRdir == 0 && TRACKrotdir == 1)
+  {
+    digitalWrite(TRdirPin, HIGH);
+  }
+  else if (TRdir == 0 && TRACKrotdir == 0)
+  {
+    digitalWrite(TRdirPin, LOW);
+  }
+
+
+  //HOW TO READ IN THETA AND THETA DOTS?
+
+
+
+  /////CALC SPEEDS//////
+  float ACCStep = (HighStep * (ACCdur / 100));
+  float DCCStep = HighStep - (HighStep * (DCCdur / 100));
+  float AdjSpeed = (SpeedIn / 100);
+  //REG SPEED
+  float CalcRegSpeed = (SpeedMult / AdjSpeed);
+  int REGSpeed = int(CalcRegSpeed);
+
+  //ACC SPEED
+  float ACCspdT = (ACCspd / 100);
+  float CalcACCSpeed = ((SpeedMult + (SpeedMult / ACCspdT)) / AdjSpeed);
+  float ACCSpeed = (CalcACCSpeed);
+  float ACCinc = (REGSpeed - ACCSpeed) / ACCStep;
+
+  //DCC SPEED
+  float DCCspdT = (DCCspd / 100);
+  float CalcDCCSpeed = ((SpeedMult + (SpeedMult / DCCspdT)) / AdjSpeed);
+  float DCCSpeed = (CalcDCCSpeed);
+  float DCCinc = (REGSpeed + DCCSpeed) / DCCStep;
+  DCCSpeed = REGSpeed;
+
+
+
+
+  ///// DRIVE MOTORS /////
+  while (J1cur < J1step || J2cur < J2step || J3cur < J3step || J4cur < J4step || J5cur < J5step || J6cur < J6step || TRcur < TRstep)
+  {
+
+    /////// J1 ////////////////////////////////
+    if (J1cur < J1step)
+    {
+      J1cur = ++J1cur;
+      digitalWrite(J1stepPin, LOW);
+      delayMicroseconds(curDelay);
+      digitalWrite(J1stepPin, HIGH);
+    }
+
+    /////// J2 ////////////////////////////////
+    if (J2cur < J2step)
+    {
+      J2cur = ++J2cur;
+      digitalWrite(J2stepPin, LOW);
+      delayMicroseconds(curDelay);
+      digitalWrite(J2stepPin, HIGH);
+    }
+
+    /////// J3 ////////////////////////////////
+    if (J3cur < J3step)
+    {
+      J3cur = ++J3cur;
+      digitalWrite(J3stepPin, LOW);
+      delayMicroseconds(curDelay);
+      digitalWrite(J3stepPin, HIGH);
+    }
+
+    /////// J4 ////////////////////////////////
+    if (J4cur < J4step)
+    {
+      J4cur = ++J4cur;
+      digitalWrite(J4stepPin, LOW);
+      delayMicroseconds(curDelay);
+      digitalWrite(J4stepPin, HIGH);
+    }
+
+    /////// J5 ////////////////////////////////
+    if (J5cur < J5step)
+    {
+      J5cur = ++J5cur;
+      digitalWrite(J5stepPin, LOW);
+      delayMicroseconds(curDelay);
+      digitalWrite(J5stepPin, HIGH);
+    }
+
+    /////// J6 ////////////////////////////////
+    if (J6cur < J6step)
+    {
+      J6cur = ++J6cur;
+      digitalWrite(J6stepPin, LOW);
+      delayMicroseconds(curDelay);
+      digitalWrite(J6stepPin, HIGH);
+    }
+  }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //MAIN
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1802,6 +2123,18 @@ void loop() {
         inData = ""; // Clear recieved buffer
         ////////MOVE COMPLETE///////////
       }
+
+
+	/*CUSTOM MOVE COMMAND*/
+	
+	  if (function == "MV")
+      {
+        Serial.print("command recieved");
+        driveMotorsS(inData);
+        inData = ""; // Clear recieved buffer
+        ////////MOVE COMPLETE///////////
+      }
+
 
 
       //----- MOVE L ---------------------------------------------------
