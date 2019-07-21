@@ -1234,7 +1234,7 @@ void driveMotorsL(String inData) {
 }
 
 
-void driveMotorsS(String inData) {
+void driveMotorsMV(String inData) {
   int J1start = inData.indexOf('A');
   int J2start = inData.indexOf('B');
   int J3start = inData.indexOf('C');
@@ -2130,7 +2130,7 @@ void loop() {
 	  if (function == "MV")
       {
         Serial.print("command recieved");
-        driveMotorsS(inData);
+        driveMotorsMV(inData);
         inData = ""; // Clear recieved buffer
         ////////MOVE COMPLETE///////////
       }
