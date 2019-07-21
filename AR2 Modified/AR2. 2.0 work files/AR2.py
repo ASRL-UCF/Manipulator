@@ -847,7 +847,7 @@ def executeRow():
       ser.read() 
   ##Move MV Command##
   if (cmdType == "Move MV"):
-	J1newIndex = command.find("X) ")
+    J1newIndex = command.find("X) ")
     J2newIndex = command.find("Y) ")
     J3newIndex = command.find("Z) ")
     J4newIndex = command.find("W) ")
@@ -2578,8 +2578,7 @@ def teachInsertBelSelected():
     value=tab1.progView.get(0,END)
     pickle.dump(value,open(ProgEntryField.get(),"wb"))
   elif(movetype == "Move MV"):
-    movetype = movetype+" [SP:"+str(SavePosEntryField.get())+"] offs [*SP:"+str(int(SavePosEntryField.get())+1)+"] "
-    newPos = movetype + " [*]  T) "+TrackPosWrite+"   Speed-"+Speed+" Ad "+ACCdur+" As "+ACCspd+" Dd "+DECdur+" Ds "+DECspd+ " $"+WC
+    newPos = movetype + " [*]  X) "+J1AngWrite+"   Y) "+J2AngWrite+"   Z) "+J3AngWrite+"   W) "+J4AngWrite+"   P) "+J5AngWrite+"   R) "+J6AngWrite+"   T) "+TrackPosWrite+"   Speed-"+Speed+" Ad "+ACCdur+" As "+ACCspd+" Dd "+DECdur+" Ds "+DECspd+ " $"+WC              
     tab1.progView.insert(selRow, newPos) 
     tab1.progView.selection_clear(0, END)
     tab1.progView.select_set(selRow)
