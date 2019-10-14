@@ -73,6 +73,7 @@ Servo servo6;
 Servo servo7;
 
 String inData;
+String angles;
 String function;
 char WayPt[101][50];
 int WayPtDel;
@@ -1233,8 +1234,9 @@ void driveMotorsL(String inData) {
   }
 }
 
+//CUSTOM DRIVE COMMAND
 
-void driveMotorsMV(String inData) {
+void driveMotorsMV(String inData, String angles) {
   int J1start = inData.indexOf('A');
   int J2start = inData.indexOf('B');
   int J3start = inData.indexOf('C');
@@ -1467,9 +1469,30 @@ void driveMotorsMV(String inData) {
   }
 
 
-  //HOW TO READ IN THETA AND THETA DOTS?
-
-
+  //HOW TO READ IN THETAs and timesteps AND CALCULTE THETA DOTS?
+  
+  //calculate theta dots 
+  
+  int anglength = angles.length();
+  String thetad
+  int i;
+  int j;
+  
+  for (i=1;i>anglength-1;i++)
+  {
+	for(j=1;j>7;i++)
+	{
+		//forward finite difference for the first step
+		if(i==1)
+		{
+		//MATLAB CODE: thetad{i}(j,1) = (J{i+1}(j)-(J{i}(j)))/ts;
+		}
+		else
+		{
+		//MATLAB CODE thetad{i}(j,1) = (J{i+1}(j)-(J{i}(j)))/ts;
+		}
+	}
+  }
 
   /////CALC SPEEDS//////
   float ACCStep = (HighStep * (ACCdur / 100));
@@ -1492,6 +1515,9 @@ void driveMotorsMV(String inData) {
   float DCCinc = (REGSpeed + DCCSpeed) / DCCStep;
   DCCSpeed = REGSpeed;
 
+  //another double for loop needs to be set up to calculate microsecond delay based on
+  //
+  //microsecond delay= 1/(thetadot(in rads per sec) * # of steps per rev of motor / 2pi)
 
 
 
@@ -2130,7 +2156,9 @@ void loop() {
 	  if (function == "MV")
       {
         Serial.print("command recieved");
-        driveMotorsMV(inData);
+		angles = Serial.read();
+		Serial.print("command recieved");
+        driveMotorsMV(inData,angles);
         inData = ""; // Clear recieved buffer
         ////////MOVE COMPLETE///////////
       }

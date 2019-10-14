@@ -201,8 +201,9 @@ MOVING THE ARM
 	
 		microsecond delay= 1/(thetadot(in rads per sec) * # of steps per rev of motor / 2pi)
 	
+	MoveNewMV - code set up for sending angles and getting confirmation. how to store angles in python script as variable angles
 	
-	
+	timestep also needs to be sent over
 	
 	
 	
