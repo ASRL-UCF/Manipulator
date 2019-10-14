@@ -1,3 +1,6 @@
+#include <AccelStepper.h>
+#include <MultiStepper.h>
+
 /*  AR2 - Stepper motor robot control software Ver 2.2.0
     Copyright (c) 2017, Chris Annin
     All rights reserved.
@@ -1524,7 +1527,19 @@ void driveMotorsMV(String inData, String angles) {
   ///// DRIVE MOTORS /////
   while (J1cur < J1step || J2cur < J2step || J3cur < J3step || J4cur < J4step || J5cur < J5step || J6cur < J6step || TRcur < TRstep)
   {
+    
+    //time delay between movement commands = duration of movement in sec/number of waypoints set
+    //placeholder name of timesec to denote time of delay in sec
+    for(u=0; u<sizeof(thetad); u++)
+    {
+     //move all 6 motors at their speed at time step u
+     //delay for the amount of time needed
+     //loop
 
+      delay(timesec*1000);
+    }
+    
+    /* OLD MOVE CODE
     /////// J1 ////////////////////////////////
     if (J1cur < J1step)
     {
@@ -1578,6 +1593,7 @@ void driveMotorsMV(String inData, String angles) {
       delayMicroseconds(curDelay);
       digitalWrite(J6stepPin, HIGH);
     }
+    */
   }
 }
 
