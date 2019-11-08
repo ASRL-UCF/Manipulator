@@ -1,5 +1,11 @@
-# Manipulator Code Base for AR2
+# Manipulator ASRL
 
-All original code is based on Chris Annin's AR2 robotic manipulator project: https://github.com/Chris-Annin/AR2
+This repo will host all working files being used in the Astrodynamics and Space Robotics Lab.
 
-This repo will host modified code base for AR2 that will allow for trajectory planning for the end effector. Original, unedited files for AR2 will be hosted on this repo as well for orginization.
+The lab currently uses the AR2 designed by Chris Annin (https://github.com/Chris-Annin/AR2) for the manipulator used in the Rapid Orbital Motion Emulator (ROME) research project.
+
+Original, unedited files for AR2 are hosted on this repo for orginization purposes.
+All original code based on Chris Annin's AR2 robotic manipulator project: https://github.com/Chris-Annin/AR2
+
+Original, unedited files for Robotics Toolbox by Peter Corke are hosted on this repo for orginization purposes.
+Original code for the Robotics Toolbox can be found here: https://petercorke.com/wordpress/toolboxes/robotics-toolbox
