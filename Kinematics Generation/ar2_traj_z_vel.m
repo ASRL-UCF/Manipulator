@@ -42,7 +42,7 @@ chi=length(refTraj);
 %initial theta positions at start of maneuver -- find different initial
 %angle
 theta=cell(chi,1);
-theta{1} = (pi/180)*[0.0043219;-54.5667;19.4159-90;-1.0845e-10;35.1508;-0.0043219+180];
+theta{1} = (pi/180)*[0;-115;115;0;-90;0];
 
 %theta0(3)=theta0(3)-90;
 %theta0(6)=theta0(6)+180;
