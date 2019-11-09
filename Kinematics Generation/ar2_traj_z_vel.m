@@ -31,6 +31,8 @@ clear;tic;
 %time of manuever in seconds
 t=60;
 
+radToDeg=180/pi;
+degToRad=pi/180;
 
 %non-cannotical units
 load('refTraj.mat');
