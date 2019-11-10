@@ -39,13 +39,13 @@ degToRad=pi/180;
 chi=length(refTraj);
 
 %convert canonical units to mm and mm/s
-% refTraj=refTraj*100;
+% refTraj=refTraj;
 % 
-% refTraj(:,2)=refTraj(:,2);
+refTraj(:,2)=refTraj(:,2)*(1/100);
 %initial theta positions at start of maneuver -- find different initial
 %angle
 theta=cell(chi,1);
-theta{1} = (pi/180)*[0;-40;90;0;12;0];
+theta{1} = (pi/180)*[0;-70;90;0;12;0];
 
 %theta0(3)=theta0(3)-90;
 %theta0(6)=theta0(6)+180;
@@ -95,5 +95,7 @@ thetad=thetad';
 % Converted to Path File Needed For Control.
 path=[tv theta thetad];
 pathDeg(:,2:end)=path(:,2:end)*180/pi;
+
+validateTrajectory(path)
 
 toc
