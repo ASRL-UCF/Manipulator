@@ -35,17 +35,17 @@ radToDeg=180/pi;
 degToRad=pi/180;
 
 %non-cannotical units
-% load('Line.mat');
+load('refTraj.mat');
 chi=length(refTraj);
 
 %convert canonical units to mm and mm/s
-% refTraj=refTraj*100;
-% 
-% refTraj(:,2)=refTraj(:,2);
+refTraj=refTraj*50;
+
+refT
 %initial theta positions at start of maneuver -- find different initial
 %angle
 theta=cell(chi,1);
-theta{1} = (pi/180)*[0;-40;90;0;12;0];
+theta{1} = (pi/180)*[0;-40;120;0;12;0];
 
 %theta0(3)=theta0(3)-90;
 %theta0(6)=theta0(6)+180;
@@ -74,7 +74,7 @@ for i=1:chi
         
         
 %       Calculate new theta to feed back
-        if i == chi
+        if i == 3000
             break
         end
         
@@ -94,6 +94,6 @@ thetad=thetad';
 
 % Converted to Path File Needed For Control.
 path=[tv theta thetad];
-pathDeg(:,2:end)=path(:,2:end)*180/pi;
+pathDeg=path*180/pi;
 
 toc
