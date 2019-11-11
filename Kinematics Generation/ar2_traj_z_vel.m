@@ -97,6 +97,13 @@ path=[tv theta thetad];
 pathDeg=path;
 pathDeg(:,2:end)=path(:,2:end)*180/pi;
 
+% downsample
+oL = length(original);
+downsampled = interp1(1:oL, original, linspace(1,oL,3000));
+
+
+
+
 validateTrajectory(path)
 
 toc
