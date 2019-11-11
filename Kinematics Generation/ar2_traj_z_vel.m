@@ -35,13 +35,13 @@ radToDeg=180/pi;
 degToRad=pi/180;
 
 %non-cannotical units
-% load('Line.mat');
+load('refTraj_10inc_expirement.mat');
 chi=length(refTraj);
 
 %convert canonical units to mm and mm/s
 % refTraj=refTraj;
 % 
-refTraj(:,2)=refTraj(:,2)*(1/100);
+refTraj(:,2)=refTraj(:,2)*1000;
 %initial theta positions at start of maneuver -- find different initial
 %angle
 theta=cell(chi,1);
@@ -94,6 +94,7 @@ thetad=thetad';
 
 % Converted to Path File Needed For Control.
 path=[tv theta thetad];
+pathDeg=path;
 pathDeg(:,2:end)=path(:,2:end)*180/pi;
 
 validateTrajectory(path)
