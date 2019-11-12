@@ -1,7 +1,8 @@
-
+%make into function - output, isvalid, path & pathDeg    
+%              check for trajectory validation and return 0 for isvalid if not valid
+%                    inputs, time, refTraj, inital joint pos
 
 tic;
-
 %created for the trajectory tracking problem
 %-------------------------------------------------
 
