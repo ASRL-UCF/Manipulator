@@ -1,4 +1,4 @@
-function output=plot_traj(captured,refTraj)
+function plot_traj(captured,refTraj)
 hold off;
 % chi=length(captured);
 % oL = length(refTraj);
@@ -14,6 +14,13 @@ hold off;
 
 % %  Against Time
 % hold off;
+
+if length(refTraj) > length(captured)
+   temp=captured;
+   captured=refTraj;
+   refTraj=temp;
+end
+
 tc=60/length(captured);
 tr=60/length(refTraj);
 
