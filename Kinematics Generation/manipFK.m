@@ -3,10 +3,10 @@ function states = manipFK(theta0)
 
 theta1 = theta0(1);
 theta2 = theta0(2);
-theta3 = theta0(3);
+theta3 = theta0(3)-(90*pi/180);
 theta4 = theta0(4);
 theta5 = theta0(5);
-theta6 = theta0(6);
+theta6 = theta0(6)+(180*pi/180);
 
 d1 = 169.77;    a1 = 64.2;  alpha1 = -90*pi/180;    
 d2 = 0;         a2 = 305;   alpha2 = 0;             

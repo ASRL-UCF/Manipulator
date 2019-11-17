@@ -1,4 +1,7 @@
+function [path,pathDeg] = ar2TrajVelZ(time,initialtheta,refTraj)
+
 tic;
+
 %created for the trajectory tracking problem
 %-------------------------------------------------
 
@@ -7,7 +10,6 @@ tic;
 % generates a trajectory in joint space. The inverse jacobian is used to
 % generate a joint velocity command, and using intergration, the joint
 % states are generated.
-
 
 %-------------------------------------------------
 
@@ -29,37 +31,39 @@ tic;
 
 %-------------------------------------------------
 %time of manuever in seconds
-t=60;
+
+% t=60;
+t=time;
+
 
 radToDeg=180/pi;
 degToRad=pi/180;
 
-%non-cannotical units
-load('refTraj.mat');
+%cannonical units
+% load('refTraj_10inc_expirement.mat');
 chi=length(refTraj);
 
-%convert canonical units to mm and mm/s
-refTraj=refTraj*50;
+%convert canonical units to mm and mm/s - here for converting
+scale=1;
+refTraj=refTraj*scale;
+% 
+scaleV=1;
+refTraj(:,2)=refTraj(:,2)*scaleV;
 
-refT
 %initial theta positions at start of maneuver -- find different initial
 %angle
 theta=cell(chi,1);
-theta{1} = (pi/180)*[0;-40;120;0;12;0];
+theta{1}=initialtheta;
+% theta{1} = (pi/180)*[0;-70;90;0;12;0];
 
 %theta0(3)=theta0(3)-90;
 %theta0(6)=theta0(6)+180;
 
-
-% will need to resize the units
 velE_ref = zeros(chi,6);
 velE_ref(:,3) = refTraj(:,2);
 
-
 %timesteps between points
 ts=t/chi;
-
-%-------------------------------------------------
 
 tv=zeros(chi,1);
 for i=1:t/ts
@@ -72,13 +76,12 @@ for i=1:chi
 %       Calculate new theta dots
         thetad{i} = trajectoryIK(velE_ref(i,:)',theta{i});
         
-        
 %       Calculate new theta to feed back
-        if i == 3000
+        if i == chi
             break
         end
         
-%       IS THIS RIGHT?
+%       Forward Integrate to find Angles
         theta{i+1}=theta{i}+(thetad{i}*ts); 
         
 end
@@ -94,6 +97,22 @@ thetad=thetad';
 
 % Converted to Path File Needed For Control.
 path=[tv theta thetad];
-pathDeg=path*180/pi;
+pathDeg=path;
+pathDeg(:,2:end)=path(:,2:end)*180/pi;
 
-toc
+% downsample
+% oL = length(unnamed);
+% downsampled = interp1(1:oL, unnamed, linspace(1,oL,3000));
+% downsampled=downsampled'
+
+validity=validateTrajectory(path);
+isvalid=validity(1);
+
+    if isvalid == 0
+        error("The path is not valid! Run validateTrajectory to check why.");
+    else
+        disp("The trajectory is valid!");
+    end
+
+toc;
+end
