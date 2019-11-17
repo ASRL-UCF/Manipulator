@@ -216,12 +216,12 @@ function btn_forward_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 th_1 = str2double(handles.theta_1.String)*pi/180;
 th_2 = str2double(handles.theta_2.String)*pi/180;
-th_3 = str2double(handles.theta_3.String)*pi/180;
+th_3 = (str2double(handles.theta_3.String)*pi/180;
 th_4 = str2double(handles.theta_4.String)*pi/180;
 th_5 = str2double(handles.theta_5.String)*pi/180;
-th_6 = str2double(handles.theta_6.String)*pi/180;
+th_6 = (str2double(handles.theta_6.String)*pi/180;
 
-Qf = [th_1 th_2 th_3-(90*pi/180) th_4 th_5 th_6+(180*pi/180)];
+Qf = [th_1 th_2 th_3 th_4 th_5 th_6];
 
 L(1) = Link([0 169.77 64.2 -1.5707], 'R');
 L(2) = Link([0 0 305 0], 'R');
@@ -233,21 +233,22 @@ L(6) = Link([pi -36.25 0 0], 'R');
 Robot = SerialLink(L);
 Robot.name = 'AR2';
 
-% Qi = [0 0 0 0 0 0];
-% t = 0:0.1:2;
-% q = jtraj(Qi, Qf, t);
+Qi = [0 0 0 0 0 0];
+t = 0:0.1:2;
 
-Robot.plot(Qf);
+
+q = jtraj(Qi, Qf, t);
+Robot.plot(q);
 
 T = manipFK(Qf);
-% Orientation = tr2rpy(T,'deg');
+Orientation = tr2rpy(T,'deg');
 
-handles.pos_x.String = num2str(T(1));
-handles.pos_y.String = num2str(T(2));
-handles.pos_z.String = num2str(T(3));
-handles.att_1.String = num2str(T(4)*pi/180);
-handles.att_2.String = num2str(T(5)*pi/180);
-handles.att_3.String = num2str(T(6)*pi/180);
+handles.pos_x.String = num2str(T.t(1));
+handles.pos_y.String = num2str(T.t(2));
+handles.pos_z.String = num2str(T.t(3));
+handles.att_1.String = num2str(Orientation(1));
+handles.att_2.String = num2str(Orientation(2));
+handles.att_3.String = num2str(Orientation(3));
 
 function pos_x_Callback(hObject, eventdata, handles)
 % hObject    handle to pos_x (see GCBO)
@@ -353,13 +354,13 @@ Robot.name = 'AR2_Robot';
 %      0 0 1 pz;
 %      0 0 0 1];
 %  
-% T = transl(px,py,pz) * rpy2tr(phi, theta, psi, 'deg');
-% 
-% %our bot inverts end effector rotation frame
-% T(1,1) = T(1,1)*-1;
-% T(3,3) = T(3,3)*-1;
+T = transl(px,py,pz) * rpy2tr(phi, theta, psi, 'deg');
 
-pos=[px,py,pz,phi*pi/180,theta*pi/180,psi*pi/180];
+%our bot inverts end effector rotation frame
+T(1,1) = T(1,1)*-1;
+T(3,3) = T(3,3)*-1;
+
+pos=[px,py,pz,phi,theta,psi];
 th_1 = str2double(handles.theta_1.String)*pi/180;
 th_2 = str2double(handles.theta_2.String)*pi/180;
 th_3 = str2double(handles.theta_3.String)*pi/180;
@@ -369,10 +370,9 @@ th_6 = str2double(handles.theta_6.String)*pi/180;
 
 cur=[th_1 th_2 th_3 th_4 th_5 th_6];
 
-% J = Robot.ikine(T, [1 1 1 0 0 0]) * 180/pi;
+J = Robot.ikine(T, [1 1 1 0 0 0]) * 180/pi;
 % J=invkine(Robot,pos,cur);
-J=trajectoryIK(pos,cur);
-J=J';
+
 handles.theta_1.String = num2str(J(1));
 handles.theta_2.String = num2str(J(2));
 handles.theta_3.String = num2str(J(3));
