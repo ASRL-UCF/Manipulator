@@ -1,3 +1,7 @@
+time = zeros(10,1);
+for i=1:100000
 tic
-trajectoryIK([0 0 5 0 0 0]',theta0)
-toc
+trajectoryIK([rand(1) rand(1) rand(1) rand(1) rand(1) rand(1)]',theta0);
+time(i)=toc;
+end
+meantime = mean(time)*1000
