@@ -39,10 +39,10 @@ if length(refTraj) > length(captured)
    captured=refTraj;
    refTraj=temp;
 end
-
+captured=captured(1:end-1,3);
 %Find timesteps of each seperate vector
-tc=time/length(captured);
-tr=time/length(refTraj);
+tc=time/length(captured(:,1));
+tr=time/length(refTraj(:,1));
 
 %scale reference to captured. Reference is usually in cannonical units, or
 %units WRT the base frame of the maninpulator. This transforms the units of
