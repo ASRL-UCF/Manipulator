@@ -221,7 +221,7 @@ th_4 = str2double(handles.theta_4.String)*pi/180;
 th_5 = str2double(handles.theta_5.String)*pi/180;
 th_6 = str2double(handles.theta_6.String)*pi/180;
 
-Qf = [th_1 th_2 th_3-(90*pi/180) th_4 th_5 th_6+(180*pi/180)];
+Qf = [th_1 th_2 th_3 th_4 th_5 th_6];
 
 L(1) = Link([0 169.77 64.2 -1.5707], 'R');
 L(2) = Link([0 0 305 0], 'R');
@@ -239,7 +239,7 @@ Robot.name = 'AR2';
 
 Robot.plot(Qf);
 
-T = manipFK(Qf);
+T = AR2FKZYZ(Qf);
 % Orientation = tr2rpy(T,'deg');
 
 handles.pos_x.String = num2str(T(1));
@@ -359,7 +359,7 @@ Robot.name = 'AR2_Robot';
 % T(1,1) = T(1,1)*-1;
 % T(3,3) = T(3,3)*-1;
 
-pos=[px,py,pz,phi*pi/180,theta*pi/180,psi*pi/180];
+pos=[px,py,pz,phi,theta,psi];
 th_1 = str2double(handles.theta_1.String)*pi/180;
 th_2 = str2double(handles.theta_2.String)*pi/180;
 th_3 = str2double(handles.theta_3.String)*pi/180;
@@ -371,16 +371,16 @@ cur=[th_1 th_2 th_3 th_4 th_5 th_6];
 
 % J = Robot.ikine(T, [1 1 1 0 0 0]) * 180/pi;
 % J=invkine(Robot,pos,cur);
-J=trajectoryIK(pos,cur);
-J=J';
-handles.theta_1.String = num2str(J(1));
-handles.theta_2.String = num2str(J(2));
-handles.theta_3.String = num2str(J(3));
-handles.theta_4.String = num2str(J(4));
-handles.theta_5.String = num2str(J(5));
-handles.theta_6.String = num2str(J(6));
+J = Jacobian0_analytical(cur);
+Q = pinv(J) * pos';
+handles.theta_1.String = num2str(Q(1));
+handles.theta_2.String = num2str(Q(2));
+handles.theta_3.String = num2str(Q(3));
+handles.theta_4.String = num2str(Q(4));
+handles.theta_5.String = num2str(Q(5));
+handles.theta_6.String = num2str(Q(6));
 
-Robot.plot(J*pi/180);
+%Robot.plot(Q);
 
 
 
